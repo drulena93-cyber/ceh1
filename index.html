@@ -239,12 +239,21 @@
     position: absolute;
     bottom: -60px;
     right: -24px;
-    height: 110%;
-    max-height: 660px;
+    height: 115%;
+    max-height: 700px;
     width: auto;
     object-fit: contain;
     object-position: right bottom;
-    filter: drop-shadow(-20px 0 40px rgba(155,32,32,0.15));
+    /* Плавное растворение по краям — убирает прямоугольную границу */
+    -webkit-mask-image: 
+      linear-gradient(to left, transparent 0%, black 18%, black 85%, transparent 100%),
+      linear-gradient(to top, transparent 0%, black 8%);
+    -webkit-mask-composite: destination-in;
+    mask-image: 
+      linear-gradient(to left, transparent 0%, black 18%, black 85%, transparent 100%),
+      linear-gradient(to top, transparent 0%, black 8%);
+    mask-composite: intersect;
+    filter: drop-shadow(-10px 0 30px rgba(17,24,32,0.8));
   }
 
   /* SECTION COMMON */
