@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цех Номер 1 — Автосервис</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --red: #9B2020;
+    --darkblue: #1C2B45;
+    --cream: #F0E6CC;
+    --beige: #D4BA8A;
+    --dark: #111820;
+    --text: #2A2A2A;
+    --white: #FDFAF4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'PT Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    border-bottom: 4px solid var(--red);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-badge {
+    width: 52px;
+    height: 52px;
+    background: var(--red);
+    border: 3px solid var(--beige);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .logo-badge span:first-child {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  .logo-badge span:last-child {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .logo-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .logo-text small {
+    display: block;
+    font-size: 11px;
+    color: var(--beige);
+    letter-spacing: 3px;
+    font-weight: 400;
+  }
+
+  nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  nav a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--beige);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--red); }
+
+  .header-phone {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .header-phone:hover { color: var(--red); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    background: var(--dark);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(155,32,32,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(28,43,69,0.5) 0%, transparent 50%);
+  }
+
+  /* Diagonal stripe accent */
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(135deg, transparent 30%, rgba(155,32,32,0.07) 100%);
+    border-left: 2px solid rgba(212,186,138,0.1);
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    background: rgba(155,32,32,0.15);
+    border: 1px solid rgba(155,32,32,0.4);
+    padding: 6px 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .accent { color: var(--red); }
+
+  .hero-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--beige);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    border-left: 4px solid var(--red);
+    padding-left: 16px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: rgba(240,230,204,0.75);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 460px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--red);
+    border: 2px solid var(--red);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--red);
+  }
+
+  .btn-outline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--beige);
+    background: transparent;
+    border: 2px solid var(--beige);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    background: var(--beige);
+    color: var(--dark);
+  }
+
+  /* Hero image side */
+  .hero-image-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-image-side img {
+    width: 100%;
+    max-width: 520px;
+    border: 3px solid rgba(212,186,138,0.2);
+    box-shadow: 0 0 60px rgba(155,32,32,0.2), 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--darkblue);
+    border-top: 3px solid var(--red);
+    border-bottom: 3px solid rgba(212,186,138,0.2);
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-item {
+    padding: 28px 24px;
+    text-align: center;
+    border-right: 1px solid rgba(212,186,138,0.15);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--beige);
+    margin-top: 6px;
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 80px 24px;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--darkblue);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .section-title .accent { color: var(--red); }
+
+  .section-divider {
+    width: 60px;
+    height: 4px;
+    background: var(--red);
+    margin-bottom: 48px;
+  }
+
+  /* SERVICES */
+  #services {
+    background: var(--cream);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(28,43,69,0.15);
+    border: 2px solid rgba(28,43,69,0.15);
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 32px 28px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+
+  .service-card:hover {
+    background: var(--darkblue);
+    transform: translateY(-2px);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--darkblue);
+    margin-bottom: 10px;
+    transition: color 0.25s;
+  }
+
+  .service-card:hover h3 { color: var(--cream); }
+
+  .service-card p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    transition: color 0.25s;
+  }
+
+  .service-card:hover p { color: var(--beige); }
+
+  /* WHY US */
+  #why {
+    background: var(--darkblue);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #why::before {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 80px solid rgba(155,32,32,0.08);
+  }
+
+  #why .section-title { color: var(--cream); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .why-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .why-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: rgba(155,32,32,0.3);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+
+  .why-content h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .why-content p {
+    font-size: 14px;
+    color: var(--beige);
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .why-image img {
+    width: 100%;
+    border: 3px solid rgba(212,186,138,0.15);
+    box-shadow: -20px 20px 60px rgba(0,0,0,0.4);
+  }
+
+  /* PROMOTIONS */
+  #promo {
+    background: var(--cream);
+  }
+
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .promo-card {
+    background: var(--dark);
+    border: 2px solid rgba(212,186,138,0.1);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .promo-card:hover { border-color: var(--red); }
+
+  .promo-card::after {
+    content: '★';
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    font-size: 48px;
+    color: rgba(155,32,32,0.12);
+    font-family: serif;
+  }
+
+  .promo-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--red);
+    color: var(--white);
+    padding: 4px 12px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .promo-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .promo-card p {
+    font-size: 14px;
+    color: var(--beige);
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .promo-highlight {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--red);
+    margin: 16px 0 8px;
+  }
+
+  /* GALLERY */
+  #gallery {
+    background: var(--dark);
+    padding-bottom: 60px;
+  }
+
+  #gallery .section-title { color: var(--cream); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+    filter: sepia(20%) contrast(1.05);
+  }
+
+  .gallery-item:hover img { transform: scale(1.05); filter: sepia(0%) contrast(1.1); }
+
+  .gallery-item.wide {
+    grid-column: span 2;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--darkblue);
+    position: relative;
+  }
+
+  #contact::before {
+    content: 'ЦЕХ 1';
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 200px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  #contact .section-title { color: var(--cream); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .contact-block h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .contact-block p, .contact-block a {
+    font-size: 18px;
+    color: var(--cream);
+    text-decoration: none;
+    line-height: 1.5;
+  }
+
+  .contact-block a:hover { color: var(--red); }
+
+  /* Form */
+  .contact-form {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(212,186,138,0.15);
+    padding: 40px;
+  }
+
+  .form-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--beige);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,186,138,0.2);
+    color: var(--cream);
+    padding: 12px 16px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--red);
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .form-group select option {
+    background: var(--darkblue);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 3px solid var(--red);
+    padding: 32px 24px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(212,186,138,0.5);
+  }
+
+  .footer-motto {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(155,32,32,0.7);
+  }
+
+  /* Hamburger mobile */
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .burger span { width: 24px; height: 2px; background: var(--beige); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .burger { display: flex; }
+
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-image-side { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-image { display: none; }
+    .promo-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.wide { grid-column: span 1; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-num { font-size: 32px; }
+    section { padding: 56px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-badge">
+        <span>ЦЕХ</span>
+        <span>1</span>
+      </div>
+      <div class="logo-text">
+        Цех Номер 1
+        <small>Автосервис</small>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#services">Услуги</a>
+      <a href="#why">О нас</a>
+      <a href="#promo">Акции</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+
+    <a href="tel:+7XXXXXXXXXX" class="header-phone">+7 (XXX) XXX-XX-XX</a>
+
+    <div class="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Профессиональный автосервис</div>
+      <h1>ЦЕХ<br><span class="accent">НОМЕР</span><br>1</h1>
+      <div class="hero-sub">Ваш автомобиль в надёжных руках</div>
+      <p class="hero-desc">Честный ремонт, современное оборудование, опытные мастера. Мы делаем всё, чтобы ваш автомобиль работал надёжно, а вы чувствовали себя уверенно на любой дороге.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Записаться на ремонт</a>
+        <a href="#services" class="btn-outline">Наши услуги</a>
+      </div>
+    </div>
+    <div class="hero-image-side">
+      <img src="картинка_7.png" alt="Цех Номер 1 — Профессиональный автосервис">
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Лет на рынке</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5000+</div>
+      <div class="stat-label">Довольных клиентов</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Гарантия на работы</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Направлений ремонта</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Что мы делаем</div>
+    <h2 class="section-title reveal">Наши <span class="accent">Услуги</span></h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="service-icon">🔧</span>
+        <h3>Диагностика и ремонт двигателя</h3>
+        <p>Профессиональная диагностика, ремонт и обслуживание двигателей любой сложности. Современное оборудование и проверенные запчасти.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚗</span>
+        <h3>Диагностика и ремонт ходовых</h3>
+        <p>Проверка и ремонт подвески, рулевого управления, тормозной системы и других узлов ходовой части.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛢️</span>
+        <h3>Замена масел и фильтров</h3>
+        <p>Замена моторного масла, трансмиссионных жидкостей и всех видов фильтров. Быстро, качественно, с гарантией.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">❄️</span>
+        <h3>Заправка кондиционеров</h3>
+        <p>Заправка, диагностика и ремонт автокондиционеров. Чистый воздух и комфорт в салоне в любое время года.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔨</span>
+        <h3>Кузовной ремонт</h3>
+        <p>Восстановление геометрии кузова, рихтовка, покраска и устранение любых повреждений. Ваш автомобиль будет как новый.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💻</span>
+        <h3>Компьютерная диагностика</h3>
+        <p>Электрика, компьютерная диагностика всех систем, ремонт выхлопной системы, замена ремней ГРМ и многое другое.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Наши преимущества</div>
+    <h2 class="section-title reveal">Почему <span class="accent">мы?</span></h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="why-grid">
+      <div class="why-list">
+        <div class="why-item reveal">
+          <div class="why-num">01</div>
+          <div class="why-content">
+            <h4>Опыт и профессионализм</h4>
+            <p>Наши мастера — специалисты с многолетним опытом работы. Решаем задачи любой сложности быстро и качественно.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-num">02</div>
+          <div class="why-content">
+            <h4>Современное оборудование</h4>
+            <p>Используем передовое диагностическое и ремонтное оборудование для точного выявления и устранения любых неисправностей.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-num">03</div>
+          <div class="why-content">
+            <h4>Гарантия на все работы</h4>
+            <p>Применяем проверенные запчасти и материалы. Даём гарантию на все виды выполненных работ.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-num">04</div>
+          <div class="why-content">
+            <h4>Честный подход</h4>
+            <p>Прозрачные цены без скрытых платежей. Предлагаем только то, что действительно нужно вашему автомобилю.</p>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-num">05</div>
+          <div class="why-content">
+            <h4>Честные сроки</h4>
+            <p>Ценим ваше время. Соблюдаем оговоренные сроки и всегда держим вас в курсе хода ремонта.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-image reveal">
+        <img src="картинка_6.png" alt="Почему Цех Номер 1">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMOTIONS -->
+<section id="promo">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Специальные предложения</div>
+    <h2 class="section-title reveal">Акции и <span class="accent">скидки</span></h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="promo-grid reveal">
+      <div class="promo-card">
+        <span class="promo-tag">Выгодно</span>
+        <h3>Замена масла и фильтра</h3>
+        <div class="promo-highlight">от 2 990 ₽</div>
+        <p>Включая масло и фильтр! Профессиональная замена с подбором масла под ваш автомобиль.</p>
+      </div>
+      <div class="promo-card">
+        <span class="promo-tag">Бесплатно</span>
+        <h3>Диагностика ходовой части</h3>
+        <div class="promo-highlight">0 ₽</div>
+        <p>Бесплатная диагностика ходовой при дальнейшем ремонте у нас. Выявим все проблемы.</p>
+      </div>
+      <div class="promo-card">
+        <span class="promo-tag">Скидка</span>
+        <h3>Скидка 10% при записи онлайн</h3>
+        <div class="promo-highlight">−10%</div>
+        <p>Запишитесь через форму на сайте или по телефону — получите скидку 10% на ремонт.</p>
+      </div>
+      <div class="promo-card">
+        <span class="promo-tag">Акция</span>
+        <h3>Заправка кондиционера</h3>
+        <div class="promo-highlight">от 1 990 ₽</div>
+        <p>Проверка системы — бесплатно! Комфортный климат в салоне по выгодной цене.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--darkblue); opacity: 0.6; text-transform: uppercase; text-align: center;">
+      Актуальные акции уточняйте по телефону — условия могут меняться
+    </p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" style="color: var(--red);">Наши работы</div>
+    <h2 class="section-title reveal">Галерея</h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item wide">
+        <img src="картинка_7.png" alt="Наши работы">
+      </div>
+      <div class="gallery-item">
+        <img src="картинка_5.png" alt="Услуги автосервиса">
+      </div>
+      <div class="gallery-item">
+        <img src="картинка_4.png" alt="Акции">
+      </div>
+      <div class="gallery-item wide">
+        <img src="картинка_3.png" alt="Почему мы">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Свяжитесь с нами</div>
+    <h2 class="section-title reveal">Записаться на <span class="accent">ремонт</span></h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <div class="contact-block">
+          <h4>Телефон</h4>
+          <a href="tel:+7XXXXXXXXXX">+7 (XXX) XXX-XX-XX</a>
+        </div>
+        <div class="contact-block">
+          <h4>Адрес</h4>
+          <p>г. [Город], ул. [Улица], д. [Номер]</p>
+        </div>
+        <div class="contact-block">
+          <h4>Режим работы</h4>
+          <p>Пн–Пт: 9:00 — 19:00<br>Сб: 10:00 — 17:00<br>Вс: выходной</p>
+        </div>
+        <div class="contact-block">
+          <h4>Девиз</h4>
+          <p style="font-family: 'Oswald', sans-serif; font-size: 20px; color: var(--red); text-transform: uppercase; letter-spacing: 2px;">Честный ремонт — долгая служба!</p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-title">Запись на ремонт</div>
+        <div class="form-group">
+          <label>Ваше имя</label>
+          <input type="text" placeholder="Иван Иванов">
+        </div>
+        <div class="form-group">
+          <label>Телефон</label>
+          <input type="tel" placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label>Вид услуги</label>
+          <select>
+            <option value="">Выберите услугу...</option>
+            <option>Диагностика и ремонт двигателя</option>
+            <option>Ремонт ходовой части</option>
+            <option>Замена масла и фильтра</option>
+            <option>Заправка кондиционера</option>
+            <option>Кузовной ремонт</option>
+            <option>Компьютерная диагностика</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Опишите проблему (необязательно)</label>
+          <textarea placeholder="Расскажите, что случилось с автомобилем..."></textarea>
+        </div>
+        <button class="btn-primary" style="width: 100%; margin-top: 8px;" onclick="submitForm()">
+          Записаться
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2024 Цех Номер 1 — Автосервис. Все права защищены.</div>
+    <div class="footer-motto">Доверьте свой автомобиль профессионалам!</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Mobile menu
+  function toggleMenu() {
+    const nav = document.querySelector('nav');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.position = 'absolute';
+    nav.style.top = '70px';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.background = '#111820';
+    nav.style.padding = '20px 24px';
+    nav.style.gap = '16px';
+    nav.style.borderBottom = '3px solid #9B2020';
+  }
+
+  // Form submit
+  function submitForm() {
+    alert('Спасибо за запись! Мы перезвоним вам в ближайшее время.');
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
