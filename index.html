@@ -497,11 +497,12 @@
 
   #contact .section-title { color: var(--cream); }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+  .contact-single {
+    max-width: 480px;
+  }
+
+  .contact-call-btn {
+    margin-top: 12px;
   }
 
   .contact-info { display: flex; flex-direction: column; gap: 28px; }
@@ -627,7 +628,6 @@
     .why-grid { grid-template-columns: 1fr; }
     .why-image { display: none; }
     .promo-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
@@ -656,7 +656,7 @@
       <a href="#contact">Контакты</a>
     </nav>
 
-    <a href="tel:+79050329873" class="header-phone">+7 905 032 98 73</a>
+    <a href="tel:+79053235566" class="header-phone">8 905 323 55 66</a>
 
     <div class="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -805,57 +805,18 @@
   </div>
 </section>
 
-<!-- PROMOTIONS -->
-<section id="promo">
-  <div class="section-inner">
-    <div class="section-eyebrow reveal">Специальные предложения</div>
-    <h2 class="section-title reveal">Акции и <span class="accent">скидки</span></h2>
-    <div class="section-divider reveal"></div>
-
-    <div class="promo-grid reveal">
-      <div class="promo-card">
-        <span class="promo-tag">Выгодно</span>
-        <h3>Замена масла и фильтра</h3>
-        <div class="promo-highlight">от 2 990 ₽</div>
-        <p>Включая масло и фильтр! Профессиональная замена с подбором масла под ваш автомобиль.</p>
-      </div>
-      <div class="promo-card">
-        <span class="promo-tag">Бесплатно</span>
-        <h3>Диагностика ходовой части</h3>
-        <div class="promo-highlight">0 ₽</div>
-        <p>Бесплатная диагностика ходовой при дальнейшем ремонте у нас. Выявим все проблемы.</p>
-      </div>
-      <div class="promo-card">
-        <span class="promo-tag">Скидка</span>
-        <h3>Скидка 10% при записи онлайн</h3>
-        <div class="promo-highlight">−10%</div>
-        <p>Запишитесь через форму на сайте или по телефону — получите скидку 10% на ремонт.</p>
-      </div>
-      <div class="promo-card">
-        <span class="promo-tag">Акция</span>
-        <h3>Заправка кондиционера</h3>
-        <div class="promo-highlight">от 1 990 ₽</div>
-        <p>Проверка системы — бесплатно! Комфортный климат в салоне по выгодной цене.</p>
-      </div>
-    </div>
-    <p style="margin-top:20px;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:var(--darkblue);opacity:0.5;text-transform:uppercase;text-align:center;">
-      Актуальные акции уточняйте по телефону — условия могут меняться
-    </p>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Свяжитесь с нами</div>
-    <h2 class="section-title reveal">Записаться на <span class="accent">ремонт</span></h2>
+    <h2 class="section-title reveal">Запишитесь на <span class="accent">ремонт</span></h2>
     <div class="section-divider reveal"></div>
 
-    <div class="contact-grid reveal">
+    <div class="contact-single reveal">
       <div class="contact-info">
         <div class="contact-block">
           <h4>Телефон</h4>
-          <a href="tel:+79050329873">+7 905 032 98 73</a>
+          <a href="tel:+79053235566">8 905 323 55 66</a>
         </div>
         <div class="contact-block">
           <h4>Адрес</h4>
@@ -870,36 +831,7 @@
           <p style="font-family:'Oswald',sans-serif;font-size:18px;color:var(--red);text-transform:uppercase;letter-spacing:2px;">Честный ремонт — долгая служба!</p>
         </div>
       </div>
-
-      <div class="contact-form">
-        <div class="form-title">Запись на ремонт</div>
-        <div class="form-group">
-          <label>Ваше имя</label>
-          <input type="text" placeholder="Иван Иванов">
-        </div>
-        <div class="form-group">
-          <label>Телефон</label>
-          <input type="tel" placeholder="+7 (___) ___-__-__">
-        </div>
-        <div class="form-group">
-          <label>Вид услуги</label>
-          <select>
-            <option value="">Выберите услугу...</option>
-            <option>Диагностика и ремонт двигателя</option>
-            <option>Ремонт ходовой части</option>
-            <option>Замена масла и фильтра</option>
-            <option>Заправка кондиционера</option>
-            <option>Кузовной ремонт</option>
-            <option>Компьютерная диагностика</option>
-            <option>Другое</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Опишите проблему (необязательно)</label>
-          <textarea placeholder="Расскажите, что случилось с автомобилем..."></textarea>
-        </div>
-        <button class="btn-primary" style="width:100%;margin-top:8px;" onclick="submitForm()">Записаться</button>
-      </div>
+      <a href="tel:+79053235566" class="btn-primary contact-call-btn">Позвонить и записаться</a>
     </div>
   </div>
 </section>
